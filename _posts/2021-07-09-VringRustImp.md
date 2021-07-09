@@ -7,6 +7,9 @@ tags: RustVMM
 
 # VirtIO实现原理_Vring数据结构
 
+![avatar](/images/posts/20210709-Vring/20191231092024327.png)
+
+
 在virtio设备上传输批量数据的机制被称为virtqueue。 每个设备可以有零个或多个virtqueues。每个队列都有一个16位的队列大小参数，它设置条目的数量并表示队列的总大小。
 
 每个virtqueue包含三个部分：
