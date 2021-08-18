@@ -11,7 +11,7 @@ tags: 内核之kvm
 
 ## kvm_vm_ioctl(KVM_GET_DIRTY_LOG)
 由kvm_log_sync->kvm_physical_sync_dirty_bitmap进行调用。在看下面的代码时，可以回到这里查看总体结构图，以防迷失：
-![avatar](https://github.com/arafatms/arafatms.github.io/blob/main/images/posts/20210818-KvmDirtyMap/1554690667848.png?raw=true)
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210818-KvmDirtyMap/1554690667848.png?raw=true)
 
 ```
 kvm_vm_ioctl(s, KVM_GET_DIRTY_LOG, &d)  |
