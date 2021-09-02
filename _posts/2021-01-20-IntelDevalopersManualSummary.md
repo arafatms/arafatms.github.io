@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 【AMD64 开发手册】一，系统编程摘要
+title: 【AMD64开发手册】一，系统编程摘要
 date: 2021-9-2 
-tags: AMD64 开发手册    
+tags: AMD64开发手册    
 ---
 
 
@@ -19,7 +19,11 @@ tags: AMD64 开发手册
 
 各个模式之间的差异见下图：
 
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/OPModes.png?raw=true)
+
 模式之间的转换见下图：
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/OPModeChange.png?raw=true)
 
 
 ## 内存模型 Memory Model
@@ -44,21 +48,29 @@ OS需要负责利用页面映射来映射虚拟地址到物理地址的转换
 - 长模式：提供52位的地址空间，需要开启页面转换和PAE；
 
 ## 内存管理
-内存管理包含软件产生的地址转换成物理地址的方案（段机制活着页面转换）。
+内存管理包含软件产生的地址转换成物理地址的方案（段机制或者页面转换）。
 
 ### 段机制 Segmentation
 源本用于隔离系统软件，一些信息等。目前很多主流的操作系统都不适用这个机制，反而使用页面保护（page-level protection）机制。因为后者更简单，高效。
 如linux系统传统模式和兼容模式只是用来过渡，所以对分段机制不需要了解太多。
 以上两种模式下可以提供16383个单独的段，这就会导致无法创建过多的现成。
 
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/SegmentedMemMode.png?raw=true)
+
 ### 内存映射
 PML4 就是通过四级映射找到虚拟地址对应的物理地址。
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/PML.png?raw=true)
 
 ### 64位模式下的内存管理
 64为模式下，所有段基地址都会设为0，因此有效地址=虚拟地址，成功找到虚拟地址以后利用PML4机制找到对应的物理地址。
 
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/64BitMemoryMode.png?raw=true)
 
 ## 系统寄存器
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/SystemRegisters.png?raw=true)
+
 系统寄存器包含：
 - 控制寄存器（control register）：用于控制系统操作或者特性；
 - 系统标志寄存器（system-flag register）：RFLAG寄存器包含系统状态标志和掩码；
@@ -69,8 +81,11 @@ PML4 就是通过四级映射找到虚拟地址对应的物理地址。
 - EFER（Extended feature enable register）：用于使能和反馈状态一些CS寄存器没有记录的特性，比如用EFER.LME=1启动长模式；
 - 其他
 
+
 ## 系统数据结构（system data structures）
 由OS创建和维护并给处理器使用，当运行在保护模式下时这些数据结构用与管理内存和保护，以及当发生中断或者任务切换是保存信息。
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/SystemDataStructure.png?raw=true)
 
 系统数据结构包含：
 - descriptor描述符：提供段的信息（位置，大小，PL）等给处理器。一类描述符的集合称为gate门。门用于找到对应的描述符。
