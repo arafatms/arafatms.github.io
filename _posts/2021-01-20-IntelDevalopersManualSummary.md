@@ -8,12 +8,12 @@ tags: AMD64开发手册
 
 # 系统编程摘要
 此文章介绍AMD64架构的基础特性和能力。一般AMD64处理器可以运行在以下6种模式下：
-- 传统模式 long mode
+- 传统模式 legacy modelong mode
     - 实模式 real mode：处理器reset或者供电时跑在实模式下，类似80286处理器，只能寻址1MB
     - 保护模式 protected mode：此模式下系统提供4GB的物理和虚拟内存，OS运行在PL0或者PL1，应用程序运行在PL3
     - virtual-8086 mode：
-    - system managment mode：电源管理（APIC）等系统管理程序
-- 长模式 legacy mode：64位linux最后会跑在长模式下，进入长模式之前系统必须使能保护模式，转换过程见后续图
+    - system managment mode：电源管理（ACPI）等系统管理程序
+- 长模式 long mode：64位linux最后会跑在长模式下，进入长模式之前系统必须使能保护模式，转换过程见后续图
     - Compatibility mode
     - 64-bit mode
 
@@ -53,7 +53,7 @@ OS需要负责利用页面映射来映射虚拟地址到物理地址的转换
 ### 段机制 Segmentation
 源本用于隔离系统软件，一些信息等。目前很多主流的操作系统都不适用这个机制，反而使用页面保护（page-level protection）机制。因为后者更简单，高效。
 如linux系统传统模式和兼容模式只是用来过渡，所以对分段机制不需要了解太多。
-以上两种模式下可以提供16383个单独的段，这就会导致无法创建过多的现成。
+以上两种模式下可以提供16383个单独的段，这就会导致无法创建过多的线程。
 
 ![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/SegmentedMemMode.png?raw=true)
 
