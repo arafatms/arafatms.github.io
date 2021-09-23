@@ -117,3 +117,40 @@ The page-attribute table (PAT) mechanism extends the page-table entry format and
 控制虚拟内存的属性，一般在PML4中最低层指定类型，类型有如下几种：
 
 ![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/PAT.png?raw=true)
+
+
+## Memory-Mapped IO
+Processor implementations can independently direct reads and writes to either system memory or memory-mapped I/O. The method used for directing those memory accesses is implementation dependent. In some implementations, separate system-memory and memory-mapped I/O buses can be provided at the processor interface. In other implementations, system memory and memory-mapped I/O share common data and address buses, and system logic uses sideband signals from the processor to route accesses appropriately. Refer to AMD data sheets and application notes for more information about particular hardware implementations of the AMD64 architecture.
+
+The I/O range registers (IORRs), and the top-of-memory registers allow system software to specify where memory accesses are directed for a given address range
+
+### Extended Fixed-Range MTRR Type-Field Encodings
+The fixed-range MTRRs support extensions to the type-field encodings that allow system software to direct memory accesses to system memory or memory-mapped I/O. The extended MTRR type-field encodings use previously reserved bits 4:3 to specify whether reads and writes to a physical-address range are to system memory or to memory-mapped I/O.
+
+- WrMem:if 1 -> write to system memory; else -> writes are directed to memory-mapped IO;
+- RdMem:if 1 -> read to system memory; else -> reads are directed to memory-mapped IO;
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/ExtendedMTTR.png?raw=true)
+
+此功能也需要打开一些MSR特性：
+- MtrrFixDramEn
+- MtrrFixDramModEn
+
+### IORRs
+The IORRs operate similarly to the variable-range MTRRs. The IORRs specify whether reads and writes in any physical-address range map to system memory or memory-mapped I/O. Up to two address ranges of varying sizes can be controlled using the IORRs. A pair of IORRs are used to control each address range: IORRBasen and IORRMaskn (n is the address-range number from 0 to 1).
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/IORRBase.png?raw=true)
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/IORRMask.png?raw=true)
+
+### Top of Memory
+The top-of-memory registers, TOP_MEM and TOP_MEM2, allow system software to specify physical addresses ranges as memory-mapped I/O locations. Processor implementations can direct accesses to memory-mapped I/O differently than system I/O, and the precise method depends on the implementation. System software specifies memory-mapped I/O regions by writing an address into each of the top-of-memory registers.
+The memory regions specified by the TOP_MEM registers are aligned on 8-Mbyte boundaries as follows:
+- Memory accesses from physical address 0 to one less than the value in TOP_MEM are directed to system memory.
+- Memory accesses from the physical address specified in TOP_MEM to FFFF_FFFFh are directed to memory-mapped I/O.
+- Memory accesses from physical address 1_0000_0000h to one less than the value in TOP_MEM2 are directed to system memory.
+- Memory accesses from the physical address specified in TOP_MEM2 to the maximum physical address supported by the system are directed to memory-mapped I/O.
+
+![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/TopOfMem1.png?raw=true)
+
+> 后面的关于Secure Memory Encryption的内容想不看了
