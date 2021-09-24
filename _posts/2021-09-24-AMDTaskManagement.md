@@ -7,13 +7,6 @@ tags: AMD64开发手册
 
 # Task Management
 
-<style>
-img{
-    width: 60%;
-    padding-left: 20%;
-}
-</style>
-
 > 64位模式下使用软件切换，AMD手册的这个章节大部分内容介绍legacy模式下的硬件切换，挑几个重要内容讲解
 
 虽然64位模式下没有使用硬件切换，但是内核需要提供起码一个TSS（Task State Segment），而TR寄存器指向这个TSS。
@@ -30,4 +23,5 @@ TR寄存器中的Selector用于从GDT中获取后三个域。
 
 TSS的构造如下：
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210924-TaskManagement/TSS.png?raw=true)
+<img src="https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210924-TaskManagement/TSS.png"
+ width="400px" />
