@@ -1,16 +1,16 @@
-<style>
-img{
-    width: 60%;
-    padding-left: 20%;
-}
-</style>
-
 ---
 layout: post
 title: 【AMD64开发手册】十二，任务管理
 date: 2021-9-24
 tags: AMD64开发手册    
 ---
+
+<style>
+img{
+    width: 60%;
+    padding-left: 20%;
+}
+</style>
 
 > 64位模式下使用软件切换，AMD手册的这个章节大部分内容介绍legacy模式下的硬件切换，挑几个重要内容讲解
 
