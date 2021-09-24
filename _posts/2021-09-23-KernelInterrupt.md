@@ -7,7 +7,7 @@ tags: 内核
 
 # 中断概述
 
-<img src="https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-KernelInterrupts/Interrupt.png"
+<img src="/images/posts/20210923-KernelInterrupts/Interrupt.png"
  width="400px" />
 
 <img src="/images/posts/20210923-KernelInterrupts/Layer.png"

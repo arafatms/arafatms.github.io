@@ -87,7 +87,7 @@ The TPR is an architectural abstraction of the interrupt controller (IC), which 
 ## Long-Mode Interrupt Control Transfers
 When an interrupt occurs in long mode, the processor multiplies the interrupt vector number by 16 and uses the result as an offset into the IDT. The gate descriptor referenced by the IDT offset contains a segment-selector and a 64-bit segment-offset field. The gate-descriptor segment-offset field contains the complete virtual address for the interrupt handler. The gate-descriptor segment-selector field points to the target code-segment descriptor located in either the GDT or LDT. The code-segment descriptor is only used for privilege-checking purposes and for placing the processor in 64-bit mode. The code segment-descriptor base field, limit field, and most attributes are ignored.
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-AMDExceptionsAndInterrupts/LongModeInterruptControlTransfer.png?raw=true)
+<img src="/images/posts/20210923-AMDExceptionsAndInterrupts/LongModeInterruptControlTransfer.png" width="400px" />
 
 In long mode, the return-program stack pointer (SS:RSP) is always pushed onto the interrupt-handler stack, regardless of whether or not a privilege change occurs.
 In long mode, when a control transfer to an interrupt handler occurs, the processor performs the following:
@@ -106,11 +106,11 @@ In long mode, when a control transfer to an interrupt handler occurs, the proces
 11. Loads the segment-selector field from the gate descriptor into the CS register. The processor checks that the target code-segment is a 64-bit mode code segment.
 12. Loads the offset field from the gate descriptor into the target RIP. The interrupt handler begins execution when control is transferred to the instruction referenced by the new RIP.
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-AMDExceptionsAndInterrupts/LongModeStackAfterInterruptSame.png?raw=true)
+<img src="/images/posts/20210923-AMDExceptionsAndInterrupts/LongModeStackAfterInterruptSame.png" width="400px" />
 
 When stacks are switched during a long-mode privilege-level change resulting from an interrupt, a new SS descriptor is not loaded from the TSS. Long mode only loads an inner-level RSP from the TSS. However, the SS selector is loaded with a null selector, allowing nested control transfers, including interrupts, to be handled properly in 64-bit mode. The SS.RPL is set to the new CPL value.
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-AMDExceptionsAndInterrupts/LongModeStackAfterInterruptHigher.png?raw=true)
+<img src="/images/posts/20210923-AMDExceptionsAndInterrupts/LongModeStackAfterInterruptHigher.png" width="400px" />
 
 ### Interrupt Stack Table
 In long mode, a new interrupt-stack table (IST) mechanism is introduced as an alternative to the modified legacy stack-switch mechanism described above. The IST mechanism provides a method for specific interrupts, such as NMI, double-fault, and machine-check, to always execute on a knowngood stack.
