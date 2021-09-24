@@ -7,9 +7,11 @@ tags: 内核
 
 # 中断概述
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-KernelInterrupts/Interrupt.png?raw=true)
+<img src="https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-KernelInterrupts/Interrupt.png"
+ width="400px" />
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210923-KernelInterrupts/Layer.png?raw=true)
+<img src="/images/posts/20210923-KernelInterrupts/Layer.png"
+ width="400px" />
 
 - 硬件层：最下层为硬件连阶层，对应的是具体的外设与SoC的物理连接，中断信号是从外设到中断控制器，由中断控制器统一管理，再路由到处理器上；
 - 硬件相关层：这个层包括两个部分代码
@@ -19,7 +21,7 @@ tags: 内核
 - 用户层：这部分也就是中断的使用者了，主要是各类设备驱动，通关中断相关接口来进行申请和注册，最终在外设触发中断时，进行相应的回调处理；
 
 # 举例
-可以先看一下 [https://arafatms.github.io/2021/09/AMDExceptionAndInterrupts/]
+可以先看一下 [中断和异常](https://arafatms.github.io/2021/09/AMDExceptionAndInterrupts/)
 
 首先发生中断时，CPU根据中断向量*16 + IDT Base Address 找到对应的中断描述福，中断描述符中记录着如下信息：
 - Code Segment offset -> 中断处理函数CS
