@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 【内核之系统调用】一，系统调用详解
+title: 【内核】一，系统调用详解
 date: 2021-9-14
-tags: 内核之系统调用
+tags: 内核
 ---
 
 # 系统调用详解
@@ -168,7 +168,7 @@ syscall_return_via_sysret:
 	 * Save old stack pointer and switch to trampoline stack.
 	 */
 	movq	%rsp, %rdi
-	movq	PER_CPU_VAR(cpu_tss_rw + TSS_sp0), %rsp //切换到trampoline stack（原来tss.sp0中保存着这哥们）
+	movq	PER_CPU_VAR(cpu_tss_rw + TSS_sp0), %rsp //切换到trampoline stack（原来tss.sp0中保存着这哥们）蹦床栈
 
 	pushq	RSP-RDI(%rdi)	/* RSP */   //用户RSP和RDI入栈
 	pushq	(%rdi)		/* RDI */
