@@ -20,7 +20,7 @@ AMD64架构定义从48位虚拟地址映射到52位物理地址的页面映射�
 
 根据模式不同所使用的特性也不通，见下图：
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/SupportedPagingAlternatives.png?raw=true)
+<img src="/images/posts/20210913-AMDPageTranslation/SupportedPagingAlternatives.png" width="700px" />
 
 其中Page-Directory Page Size (PS) 位用来控制此页表是否处于页面转换的最底层，比如如果PDE.PS=1，PDE作为映射的最底层可以映射2MB大小的大内存页面，此方法同样用于映射1GB大页内存。
 
@@ -34,7 +34,7 @@ PAE映射下新增了一项映射表称之为PML4，长模式下R4.PSE是被忽�
 ### CR3寄存器
 PML4E基地址保存在CR3寄存器中。CR3寄存器结构如下：
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/CR3.png?raw=true)
+<img src="/images/posts/20210913-AMDPageTranslation/CR3.png" width="700px" />
 
 - 表基地址域：40位的PML4基地址，因为要4K对其所以补充12位的0即可得到52位的物理地址。
 - Page-Level Writethrough(PWT):上级页表cache是否要writethrough还是writeback；
@@ -44,17 +44,18 @@ PML4E基地址保存在CR3寄存器中。CR3寄存器结构如下：
 ### 4K页面映射
 话不多说见图：
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/4KPML4.png?raw=true)
+<img src="/images/posts/20210913-AMDPageTranslation/4KPML4.png" width="700px" />
 
 其中：
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/4KPML41.png?raw=true)
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/4KPML42.png?raw=true)
+<img src="/images/posts/20210913-AMDPageTranslation/4KPML41.png" width="700px" />
+
+<img src="/images/posts/20210913-AMDPageTranslation/4KPML42.png" width="700px" />
 
 ### 2M页面映射
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/2MPML4.png?raw=true)
+<img src="/images/posts/20210913-AMDPageTranslation/2MPML4.png" width="700px" />
 
 其中：
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210913-AMDPageTranslation/2MPML41.png?raw=true)
+<img src="/images/posts/20210913-AMDPageTranslation/2MPML41.png" width="700px" />
 
 可以看出2M页面映射中，PDE.PS位职位1，表示最底层页表。
 

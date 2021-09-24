@@ -16,7 +16,8 @@ OS可以使用页面映射或者分段机制来实现被保护的内存模型。
 这俩指令假定OS实现了平坦内存模型（flat-memory model），因此可以大程度的简化系统调用和系统返回流程。要求代码段基地址，大小和特性在任何应用和系统程序中都是一样的（DPL除外）。处理器假定SYSCALL目标代码段描述符入口拥有DPL=0，返回时则为DPL=3.
 
 STAR，LSTAR，CSTAR等MRS寄存器用于保存SYSCALL的目标地址和返回地址。SFMASK寄存器用于说明rFLAGS怎么被这些指令修改。
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210914-SystemInstructions/StarLstarCstar.png?raw=true)
+
+<img src="/images/posts/20210914-SystemInstructions/StarLstarCstar.png" width="700px" />
 
 - STAR：STAR寄存器包含以下区域：
     - SYSRET CS and SS Selectors：系统调用返回时CS，SS的段选择索引；

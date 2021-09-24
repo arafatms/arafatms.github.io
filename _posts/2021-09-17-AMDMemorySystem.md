@@ -14,7 +14,7 @@ tags: AMD64开发手册
 - Memory ordering rules
 - Serializing instructions
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/processorAndMemorySystem.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/processorAndMemorySystem.png" width="700px" />
 
 主存位于处理器芯片之外，而且离处理器执行单元较远。所以引入缓存Cache，缓存可以位于处理器内部或者外部。
 - L1 Data Cache: 缓存最常访问的数据
@@ -63,7 +63,7 @@ write-combining buffers：缓存一些对应用程序不仅要的不可缓存写
 - Modified：被修改的副本，主存中的数据是错误的。没有其他处理器拷贝此副本；
 - Owned：跟Shared一样，区别在于Owned时，主存数据是错误的。只有一个处理器can own。
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/MOESI.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/MOESI.png" width="700px" />
 
 为了保持内存一致性，外部总线主控器（通常是具有自己内部缓存的其他处理器）需要在内部缓存数据之前获取最新的数据副本。 该副本可以在主内存中或在其他总线主控设备的内部缓存中。 当外部总线主控器有缓存读取未命中或写入未命中时，它会探测其他主控设备以确定最新的数据副本是否保存在它们的任何缓存中。 如果其他主控设备之一拥有最新的副本，则它将其提供给请求设备。 否则，最新的副本由主存储器提供。
 
@@ -82,7 +82,7 @@ The AMD64 architecture defines the following memory types:
 ## Memory Caches
 The AMD64 architecture supports the use of internal and external caches. The size, organization, coherency mechanism, and replacement algorithm for each cache is implementation dependent. Generally, the existence of the caches is transparent to both application and system software. In some cases, however, software can use cache-structure information to optimize memory accesses or manage memory coherency. Such software can use the extended-feature functions of the CPUID instruction to gather information on the caching subsystem supported by the processor.
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/MemoryCaches.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/MemoryCaches.png" width="700px" />
 
 Each cache line consists of three parts: a cache-data line (a fixed-size copy of a memory block), a tag, and other information. Rows of cache lines in the cache array are sets, and columns of cache lines are ways.
 - Index—The index field selects the cache set (row) to be examined for a hit. All cache lines within the set (one from each way) are selected by the index field.
@@ -96,7 +96,7 @@ This section describes a control mechanism that uses a set of programmable model
 
 所有MTRR寄存器都为MSR寄存器,MTRR有以下几种类型Type：
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/MTRRType.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/MTRRType.png" width="700px" />
 
 ### Fixed-Range MTRRs
 固定区域分类，一般控制最低1M内存。
@@ -104,20 +104,19 @@ This section describes a control mechanism that uses a set of programmable model
 ### Variable-Range MTRRs
 一共由8组MSR寄存器构成
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/MTRRBase.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/MTRRBase.png" width="700px" />
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/MTRRMask.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/MTRRMask.png" width="700px" />
 
 和一个全局寄存器控制默认值
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/MTRRDefault.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/MTRRDefault.png" width="700px" />
 
 ## Page-Attribute Table Mechanism
 The page-attribute table (PAT) mechanism extends the page-table entry format and enhances the capabilities provided by the PCD and PWT page-level cache controls. PAT (and PCD, PWT) allow memory-type characterization based on the virtual (linear) address. The PAT mechanism provides the same memory-typing capabilities as the MTRRs but with the added flexibility of the paging mechanism. Software can use both the PAT and MTRR mechanisms to maximize flexibility in memory-type control.
 控制虚拟内存的属性，一般在PML4中最低层指定类型，类型有如下几种：
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/PAT.png?raw=true)
-
+<img src="/images/posts/20210917-AMDMemorySystem/PAT.png" width="700px" />
 
 ## Memory-Mapped IO
 Processor implementations can independently direct reads and writes to either system memory or memory-mapped I/O. The method used for directing those memory accesses is implementation dependent. In some implementations, separate system-memory and memory-mapped I/O buses can be provided at the processor interface. In other implementations, system memory and memory-mapped I/O share common data and address buses, and system logic uses sideband signals from the processor to route accesses appropriately. Refer to AMD data sheets and application notes for more information about particular hardware implementations of the AMD64 architecture.
@@ -130,7 +129,7 @@ The fixed-range MTRRs support extensions to the type-field encodings that allow 
 - WrMem:if 1 -> write to system memory; else -> writes are directed to memory-mapped IO;
 - RdMem:if 1 -> read to system memory; else -> reads are directed to memory-mapped IO;
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/ExtendedMTTR.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/ExtendedMTTR.png" width="700px" />
 
 此功能也需要打开一些MSR特性：
 - MtrrFixDramEn
@@ -139,9 +138,9 @@ The fixed-range MTRRs support extensions to the type-field encodings that allow 
 ### IORRs
 The IORRs operate similarly to the variable-range MTRRs. The IORRs specify whether reads and writes in any physical-address range map to system memory or memory-mapped I/O. Up to two address ranges of varying sizes can be controlled using the IORRs. A pair of IORRs are used to control each address range: IORRBasen and IORRMaskn (n is the address-range number from 0 to 1).
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/IORRBase.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/IORRBase.png" width="700px" />
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/IORRMask.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/IORRMask.png" width="700px" />
 
 ### Top of Memory
 The top-of-memory registers, TOP_MEM and TOP_MEM2, allow system software to specify physical addresses ranges as memory-mapped I/O locations. Processor implementations can direct accesses to memory-mapped I/O differently than system I/O, and the precise method depends on the implementation. System software specifies memory-mapped I/O regions by writing an address into each of the top-of-memory registers.
@@ -151,6 +150,6 @@ The memory regions specified by the TOP_MEM registers are aligned on 8-Mbyte bou
 - Memory accesses from physical address 1_0000_0000h to one less than the value in TOP_MEM2 are directed to system memory.
 - Memory accesses from the physical address specified in TOP_MEM2 to the maximum physical address supported by the system are directed to memory-mapped I/O.
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210917-AMDMemorySystem/TopOfMem1.png?raw=true)
+<img src="/images/posts/20210917-AMDMemorySystem/TopOfMem1.png" width="700px" />
 
 > 后面的关于Secure Memory Encryption的内容想不看了

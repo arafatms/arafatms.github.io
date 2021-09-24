@@ -8,10 +8,10 @@ tags: 内核
 # 中断概述
 
 <img src="/images/posts/20210923-KernelInterrupts/Interrupt.png"
- width="400px" />
+ width="700px" />
 
 <img src="/images/posts/20210923-KernelInterrupts/Layer.png"
- width="400px" />
+ width="700px" />
 
 - 硬件层：最下层为硬件连阶层，对应的是具体的外设与SoC的物理连接，中断信号是从外设到中断控制器，由中断控制器统一管理，再路由到处理器上；
 - 硬件相关层：这个层包括两个部分代码

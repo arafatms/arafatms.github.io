@@ -24,4 +24,4 @@ TR寄存器中的Selector用于从GDT中获取后三个域。
 TSS的构造如下：
 
 <img src="https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210924-TaskManagement/TSS.png"
- width="400px" />
+ width="700px" />

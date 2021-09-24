@@ -85,7 +85,7 @@ PML4 就是通过四级映射找到虚拟地址对应的物理地址。
 ## 系统数据结构（system data structures）
 由OS创建和维护并给处理器使用，当运行在保护模式下时这些数据结构用与管理内存和保护，以及当发生中断或者任务切换是保存信息。
 
-![avatar](https://raw.githubusercontent.com/arafatms/arafatms.github.io/main/images/posts/20210902-AMDChapter1/SystemDataStructure.png?raw=true)
+<img src="/images/posts/20210902-AMDChapter1/SystemDataStructure.png" width="700px" />
 
 系统数据结构包含：
 - descriptor描述符：提供段的信息（位置，大小，PL）等给处理器。一类描述符的集合称为gate门。门用于找到对应的描述符。
