@@ -24,7 +24,7 @@ paravirt ops 的操作分为三类：
 
 Linux/IA64 具有 IA64 机器向量功能，允许内核根据执行平台切换实现（例如初始化、ipi、dma api...）。 实现 paravirt ops/IA64 的一种方法是增强机器向量。 但是，我们改为采用 pv ops 方法。 图 1 显示了 pv ops 与机器向量和其余内核的关系。 IA64 domU 被实现为 xen domU 机器向量和 xen domU pv ops 的组合。
 
-<img src="../images/posts/20221101-Paravirt/Figure1.png" width="700px" />
+<img src="/images/posts/20221101-Paravirt/Figure1.png" width="700px" />
 
 常用pv ops的分类如下：
 | name | description | type |
