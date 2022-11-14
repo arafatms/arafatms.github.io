@@ -55,6 +55,10 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
 				o -> 如果目标cpu在非idle线程运行-> send_call_function_single_ipi // 目标cpu发送ipi, 目标cpu ipi callback是generic_smp_call_function_single_interrupt
 				|
 				o -> 如果目标cpu在运行idle线程就无需发送ipi, 会自动根据call_single_queue 来调度 --> flush_smp_call_function_from_idle
+							|
+							o -> sched_ttwu_pending
+										|
+										o -> ttwu_do_activate // 下同
 		|
 		o -> ttwu_do_activate -> activate_task -> enqueue_task(rq, p, flags); /* 入队 */
 }
